@@ -13,8 +13,9 @@ byte-for-byte:
 - [Kar-Warden](https://sjgant80-hub.github.io/kar-warden/) — does an AI component still match its declared warrant?
 - [Kar-Anchor](https://sjgant80-hub.github.io/kar-anchor/) — was this content in the committed set (Merkle proof)?
 - [Wisp](https://sjgant80-hub.github.io/kar-wisp/) — do an AI's claims about a GitHub repo match GitHub's API?
+- [Glyphguard](https://sjgant80-hub.github.io/kar-glyphguard/) — does text hide invisible chars, homoglyphs, or smuggled Unicode payloads?
 
-Honest scope: a directory of seven narrow, single-question checkers — not a fact-checker or a truth
+Honest scope: a directory of eight narrow, single-question checkers — not a fact-checker or a truth
 oracle. One self-contained HTML file, nothing sent anywhere.
 
 Built by **Kar** (karma-didy) on the FallForge estate.
