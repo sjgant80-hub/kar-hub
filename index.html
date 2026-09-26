@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kar — Provable AI Verifiers</title>
+<meta name="description" content="A family of deterministic, third-party re-runnable verifiers for AI output. No LLM judge. Proof by re-running, not an opinion.">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --bg-raised: #121417;
+    --bg-card: #15171b;
+    --bg-card-hover: #1a1d22;
+    --border: #24272d;
+    --border-hover: #35393f;
+    --text: #e8e9eb;
+    --text-dim: #9a9ea6;
+    --text-faint: #6b6f76;
+    --accent: #5eead4;
+    --accent-dim: #2dd4bf;
+    --accent-bg: rgba(94, 234, 212, 0.08);
+    --accent-border: rgba(94, 234, 212, 0.25);
+    --radius: 14px;
+    --radius-sm: 9px;
+    --max-width: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  .bg-glow {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    max-width: 160vw;
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.09) 0%, rgba(94, 234, 212, 0) 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    padding: 28px 0 0;
+  }
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+  }
+  .brand .mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent) 0%, #2563eb 120%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #06110f;
+    flex-shrink: 0;
+  }
+  .estate-tag {
+    font-size: 12px;
+    color: var(--text-faint);
+    border: 1px solid var(--border);
+    padding: 5px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 64px 0 40px;
+    text-align: left;
+  }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .kicker .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  h1 {
+    font-size: clamp(32px, 5.2vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+    max-width: 16ch;
+    font-weight: 700;
+  }
+  h1 .accent { color: var(--accent); }
+  .hero-lead {
+    font-size: clamp(16px, 2vw, 18.5px);
+    color: var(--text-dim);
+    max-width: 62ch;
+    margin: 0 0 18px;
+  }
+  .hero-lead strong { color: var(--text); font-weight: 600; }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-faint);
+    max-width: 62ch;
+    margin: 0 0 32px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding: 22px 0 4px;
+    border-top: 1px solid var(--border);
+  }
+  .stat {
+    min-width: 120px;
+  }
+  .stat .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .stat .label {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+
+  /* ---------- Scope note ---------- */
+  .scope-note {
+    margin: 44px 0 8px;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .scope-note h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  .scope-note p {
+    margin: 0 0 8px;
+    font-size: 14.5px;
+    color: var(--text-dim);
+  }
+  .scope-note p:last-child { margin-bottom: 0; }
+  .scope-note .yes { color: var(--accent); font-weight: 600; }
+  .scope-note .no { color: #f0a8a8; font-weight: 600; }
+
+  /* ---------- Section headings ---------- */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 56px 0 22px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .section-head .count {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  /* ---------- Card grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-icon svg {
+    width: 19px;
+    height: 19px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.8;
+  }
+  .card-num {
+    font-size: 11.5px;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 4px;
+  }
+
+  .card h3 {
+    font-size: 17.5px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  .card .verdicts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 2px 0 2px;
+  }
+  .verdict-pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .card p.desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .open-btn:hover { background: var(--accent-dim); }
+  .open-btn:active { transform: scale(0.97); }
+  .open-btn svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+  }
+
+  .card-url {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---------- How it works ---------- */
+  .how {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .how-step {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .how-step .step-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .how-step h4 {
+    font-size: 15px;
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .how-step p {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 72px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  footer .credit {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  footer .credit strong { color: var(--text-dim); }
+  footer .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    font-size: 13px;
+  }
+  footer .foot-links a {
+    color: var(--text-faint);
+    text-decoration: none;
+  }
+  footer .foot-links a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 44px 0 32px; }
+    h1 { max-width: none; }
+    .stat-row { gap: 20px; }
+    .section-head { margin: 44px 0 18px; }
+    .card-foot { flex-direction: row; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-row">
+      <div class="brand">
+        <span class="mark">K</span>
+        Kar · karma-didy
+      </div>
+      <div class="estate-tag">FallForge estate · sovereign build</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="kicker"><span class="dot"></span> Provable AI, not persuaded AI</div>
+    <h1>Proof by <span class="accent">re-running</span> it — never an opinion from a model.</h1>
+    <p class="hero-lead">
+      This is a small family of narrow, deterministic verifiers for AI-adjacent claims.
+      Each one answers <strong>one specific question</strong> and gives you an artifact —
+      a receipt, a diff, a proof — that <strong>anyone can recompute independently</strong>
+      and get the exact same byte-for-byte answer.
+    </p>
+    <p class="hero-sub">
+      No model is asked "does this look right?" None of these tools judge, grade, or
+      vibe-check. They check a specific, falsifiable thing against a specific, disclosed
+      source, and they show their work.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">7</div>
+        <div class="label">verifiers, live</div>
+      </div>
+      <div class="stat">
+        <div class="num">0</div>
+        <div class="label">LLM judges used</div>
+      </div>
+      <div class="stat">
+        <div class="num">1</div>
+        <div class="label">question each answers</div>
+      </div>
+      <div class="stat">
+        <div class="num">100%</div>
+        <div class="label">re-runnable by a third party</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="scope-note">
+    <h2>What this is / isn't</h2>
+    <p><span class="yes">Is:</span> a curated set of narrow verifiers. Each one checks a specific, well-defined claim
+      against a source you provide, and produces a deterministic result plus a reproducible receipt or hash.</p>
+    <p><span class="no">Isn't:</span> a fact-checker, a truth oracle, or a general AI auditor. None of these tools
+      evaluate whether a claim is <em>true</em> in the world — only whether it holds up against the specific evidence
+      you gave it. They don't grade quality, safety, or intent. Scope stays deliberately small so the answer stays provable.</p>
+  </div>
+
+  <div class="section-head">
+    <h2>The verifiers</h2>
+    <span class="count">7 tools, each opens its own live page</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. CiteLock -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9m0-16v16M3 9v10a2 2 0 0 0 2 2h4"/></svg>
+        </div>
+        <div class="card-num">01 / 07</div>
+      </div>
+      <h3>CiteLock</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">VERIFIED</span>
+        <span class="verdict-pill">NEAR MATCH</span>
+        <span class="verdict-pill">NOT FOUND</span>
+      </div>
+      <p class="desc">Verify a claimed quote is genuinely present, verbatim, in a source you paste. Tells a clean
+        quote apart from an altered paraphrase or a fabrication outright, with a reproducible receipt.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-citelock</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-citelock/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 2. Kar-Veil -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        </div>
+        <div class="card-num">02 / 07</div>
+      </div>
+      <h3>Kar-Veil</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">FAITHFUL</span>
+        <span class="verdict-pill">STRUCTURE BROKEN</span>
+      </div>
+      <p class="desc">Prove a redacted document is structurally faithful to a committed original. Catches an edited,
+        forged, dropped, or reordered line — without ever seeing the hidden content.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-veil</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-veil/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 3. FairDraw -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
+        </div>
+        <div class="card-num">03 / 07</div>
+      </div>
+      <h3>FairDraw</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">MATCH</span>
+        <span class="verdict-pill">DIVERGED</span>
+        <span class="verdict-pill">LEAKAGE FOUND</span>
+      </div>
+      <p class="desc">Recompute a claimed "random" eval sample or train/test split from a disclosed population, seed,
+        and size, then diff it byte-for-byte — catching train/test leakage a claim alone would hide.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-fairdraw</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-fairdraw/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 4. Conform -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="card-num">04 / 07</div>
+      </div>
+      <h3>Conform</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">PASS</span>
+        <span class="verdict-pill">FAIL</span>
+        <span class="verdict-pill">SHA-256</span>
+      </div>
+      <p class="desc">Deterministic JSON Schema conformance for AI structured output. PASS/FAIL with exact violation
+        paths, plus a canonical hash that tells reformatting apart from real content drift.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-conform</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-conform/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 5. Kar-Warden -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="card-num">05 / 07</div>
+      </div>
+      <h3>Kar-Warden</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">INTACT</span>
+        <span class="verdict-pill">DRIFTED</span>
+        <span class="verdict-pill">BREACHED</span>
+      </div>
+      <p class="desc">Check an AI component's observed state against a declared warrant — config, capabilities,
+        files, invariants. One severe break is enough to block; nothing needs a human to spot it.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-warden</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-warden/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 6. Kar-Anchor -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M5 9l7-7 7 7M5 15a7 7 0 0 0 14 0"/></svg>
+        </div>
+        <div class="card-num">06 / 07</div>
+      </div>
+      <h3>Kar-Anchor</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">MERKLE ROOT</span>
+        <span class="verdict-pill">INCLUSION PROOF</span>
+      </div>
+      <p class="desc">Commit a batch of content to one Merkle root you can publish anywhere, then hand out
+        per-item inclusion proofs that anyone can re-check offline, with no shared ledger required.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-anchor</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-anchor/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 7. Wisp -->
+    <article class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 19c-4 0-8-3-9-7 1-4 5-7 9-7s8 3 9 7c-1 4-5 7-9 7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+        </div>
+        <div class="card-num">07 / 07</div>
+      </div>
+      <h3>Wisp</h3>
+      <div class="verdicts">
+        <span class="verdict-pill">CONFIRMED</span>
+        <span class="verdict-pill">CONTRADICTED</span>
+      </div>
+      <p class="desc">Check an AI's claims about a public GitHub repo — files exist, a gate passed, phrases are
+        present — against GitHub's own public API. Catches an agent claiming work it never did.</p>
+      <div class="card-foot">
+        <span class="card-url">kar-wisp</span>
+        <a class="open-btn" href="https://sjgant80-hub.github.io/kar-wisp/" target="_blank" rel="noopener">
+          Open <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="section-head">
+    <h2>The shape of every tool</h2>
+    <span class="count">same pattern, seven times</span>
+  </div>
+
+  <div class="how">
+    <div class="how-step">
+      <div class="step-num">STEP 1</div>
+      <h4>You give it evidence</h4>
+      <p>A source document, a population, a schema, a warrant, a repo — something disclosed and fixed, not a vibe.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">STEP 2</div>
+      <h4>It runs a fixed check</h4>
+      <p>A deterministic function, not a model call. Same inputs always produce the same output, every time.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">STEP 3</div>
+      <h4>You get a verdict + receipt</h4>
+      <p>A plain result plus the artifact behind it — a hash, a diff, a proof path — so the claim is checkable, not just stated.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">STEP 4</div>
+      <h4>Anyone re-runs it</h4>
+      <p>A third party with the same inputs gets the same byte-for-byte answer. That's the whole proof — no trust required.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="credit">Built by <strong>Kar (karma-didy)</strong> on the FallForge estate.</div>
+    <div class="foot-links">
+      <a href="https://sjgant80-hub.github.io/kar-citelock/" target="_blank" rel="noopener">CiteLock</a>
+      <a href="https://sjgant80-hub.github.io/kar-veil/" target="_blank" rel="noopener">Kar-Veil</a>
+      <a href="https://sjgant80-hub.github.io/kar-fairdraw/" target="_blank" rel="noopener">FairDraw</a>
+      <a href="https://sjgant80-hub.github.io/kar-conform/" target="_blank" rel="noopener">Conform</a>
+      <a href="https://sjgant80-hub.github.io/kar-warden/" target="_blank" rel="noopener">Warden</a>
+      <a href="https://sjgant80-hub.github.io/kar-anchor/" target="_blank" rel="noopener">Anchor</a>
+      <a href="https://sjgant80-hub.github.io/kar-wisp/" target="_blank" rel="noopener">Wisp</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
