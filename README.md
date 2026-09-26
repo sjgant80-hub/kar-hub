@@ -16,8 +16,9 @@ byte-for-byte:
 - [Glyphguard](https://sjgant80-hub.github.io/kar-glyphguard/) — does text hide invisible chars, homoglyphs, or smuggled Unicode payloads?
 - [Kar-Shingle](https://sjgant80-hub.github.io/kar-shingle/) — are two documents near-duplicates (MinHash), even if padded or reworded?
 - [Kar-Canon](https://sjgant80-hub.github.io/kar-canon/) — are two differently-formatted JSON documents byte-identical after canonicalization?
+- [Kar-Tally](https://sjgant80-hub.github.io/kar-tally/) — did an AI agent stay under its budget cap (recomputed spend ledger)?
 
-Honest scope: a directory of ten narrow, single-question checkers — not a fact-checker or a truth
+Honest scope: a directory of eleven narrow, single-question checkers — not a fact-checker or a truth
 oracle. One self-contained HTML file, nothing sent anywhere.
 
 Built by **Kar** (karma-didy) on the FallForge estate.
