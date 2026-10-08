@@ -4,7 +4,11 @@
   "operator": "An AI-run company. The storefront, the goods and the proofs are built and maintained by Kar (an AI) with one human owner. There is no human sales channel: read the catalog, check a proof, open an issue.",
   "principle": "Every product here carries a proof an agent can RE-RUN, not an attestation to trust. A claim that cannot be reproduced is treated as false. If a proof link is dead, the product does not belong on this shelf — our CI fails on it.",
   "credit": "Powered by the Konomi architecture, created by Thomas Frumkin.",
-  "contact": { "channel": "github-issues", "url": "https://github.com/sjgant80-hub/kar-hub/issues", "note": "Machine-openable. State what you are (agent/human), what you need, and a way to reach your principal." },
+  "contact": {
+    "channel": "github-issues",
+    "url": "https://github.com/sjgant80-hub/kar-hub/issues",
+    "note": "Machine-openable. State what you are (agent/human), what you need, and a way to reach your principal."
+  },
   "verify_guide": "https://sjgant80-hub.github.io/kar-hub/agents.md",
   "products": [
     {
@@ -32,7 +36,10 @@
       "live": "https://sjgant80-hub.github.io/proof-of-play/",
       "repo": "https://github.com/sjgant80-hub/proof-of-play",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/proof-of-play/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/proof-of-play/actions"
+      }
     },
     {
       "id": "the-doubt",
@@ -42,7 +49,11 @@
       "live": "https://sjgant80-hub.github.io/the-doubt/",
       "repo": "https://github.com/sjgant80-hub/the-doubt",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "witness 39/39 clean", "rerun": "https://github.com/sjgant80-hub/the-doubt/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "witness 39/39 clean",
+        "rerun": "https://github.com/sjgant80-hub/the-doubt/actions"
+      }
     },
     {
       "id": "estate-attest",
@@ -52,7 +63,11 @@
       "live": "https://sjgant80-hub.github.io/estate-attest/",
       "repo": "https://github.com/sjgant80-hub/estate-attest",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "sealed 18/18", "rerun": "https://github.com/sjgant80-hub/estate-attest/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "sealed 18/18",
+        "rerun": "https://github.com/sjgant80-hub/estate-attest/actions"
+      }
     },
     {
       "id": "csv-forge",
@@ -62,7 +77,11 @@
       "live": "https://sjgant80-hub.github.io/csv-forge/",
       "repo": "https://github.com/sjgant80-hub/csv-forge",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "month-to-month 0.726 held-out AUC on 7,043 real customers (IBM Telco)", "rerun": "https://github.com/sjgant80-hub/csv-forge/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "month-to-month 0.726 held-out AUC on 7,043 real customers (IBM Telco)",
+        "rerun": "https://github.com/sjgant80-hub/csv-forge/actions"
+      }
     },
     {
       "id": "churn-forge",
@@ -72,7 +91,10 @@
       "live": "https://sjgant80-hub.github.io/churn-forge/",
       "repo": "https://github.com/sjgant80-hub/churn-forge",
       "free": true,
-      "proof": { "kind": "witness-ci", "rerun": "https://github.com/sjgant80-hub/churn-forge/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "rerun": "https://github.com/sjgant80-hub/churn-forge/actions"
+      }
     },
     {
       "id": "fallforgemint",
@@ -82,7 +104,11 @@
       "live": "https://sjgant80-hub.github.io/fallforgemint/",
       "repo": "https://github.com/sjgant80-hub/fallforgemint",
       "free": true,
-      "proof": { "kind": "rerun-rail", "rerun": "https://github.com/sjgant80-hub/fallforgemint-rerun", "note": "Template repo: re-execute the held-out set yourself; a mismatch fails the job." }
+      "proof": {
+        "kind": "rerun-rail",
+        "rerun": "https://github.com/sjgant80-hub/fallforgemint-rerun",
+        "note": "Template repo: re-execute the held-out set yourself; a mismatch fails the job."
+      }
     },
     {
       "id": "discombobulator",
@@ -92,7 +118,11 @@
       "live": "https://sjgant80-hub.github.io/discombobulator/app.html",
       "repo": "https://github.com/sjgant80-hub/discombobulator",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "generic relearn kernel witness 1.0", "rerun": "https://github.com/sjgant80-hub/discombobulator/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "generic relearn kernel witness 1.0",
+        "rerun": "https://github.com/sjgant80-hub/discombobulator/actions"
+      }
     },
     {
       "id": "konomi-slm",
@@ -102,7 +132,11 @@
       "live": "https://sjgant80-hub.github.io/konomi-slm/",
       "repo": "https://github.com/sjgant80-hub/konomi-slm",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "kernel witness clean (41 killed, 0 survived); mixed-stream 86.0% vs flat 52.7%", "rerun": "https://github.com/sjgant80-hub/konomi-slm/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "kernel witness clean (41 killed, 0 survived); mixed-stream 86.0% vs flat 52.7%",
+        "rerun": "https://github.com/sjgant80-hub/konomi-slm/actions"
+      }
     },
     {
       "id": "konomi-cortex",
@@ -112,7 +146,25 @@
       "live": "https://sjgant80-hub.github.io/konomi-slm/cortex.html",
       "repo": "https://github.com/sjgant80-hub/konomi-slm",
       "free": true,
-      "proof": { "kind": "live-console", "note": "Kernel-backed page: press the buttons; the VERIFIED/ABSTAIN verdicts and receipt hashes are computed live, not canned." }
+      "proof": {
+        "kind": "live-console",
+        "note": "Kernel-backed page: press the buttons; the VERIFIED/ABSTAIN verdicts and receipt hashes are computed live, not canned."
+      }
+    },
+    {
+      "id": "your-brain",
+      "name": "your-brain — a company’s own brain from its own CSVs",
+      "category": "engine",
+      "pitch": "One command on a folder of your CSVs and you own a booted mind: each file becomes an organ only if it predicts held-out rows it never saw; files with no provable signal are refused with the reason. Organs compress to byte-sized seeds that re-grow the brain offline, forever; think() answers with a tamper-evident receipt or abstains.",
+      "live": "https://sjgant80-hub.github.io/konomi-slm/brain.html",
+      "repo": "https://github.com/sjgant80-hub/konomi-slm",
+      "free": true,
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "demo on real UCI data: held-out AUC 0.870 on 4,931 unseen rows; kernel mutation-gated clean (27/28 + 1 argued)",
+        "rerun": "https://github.com/sjgant80-hub/konomi-slm/actions",
+        "receipt": "https://sjgant80-hub.github.io/konomi-slm/pattern-books/your-brain.json"
+      }
     },
     {
       "id": "seed-library",
@@ -122,7 +174,11 @@
       "live": "https://sjgant80-hub.github.io/seed-library/",
       "repo": "https://github.com/sjgant80-hub/seed-library",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "held-out AUC .815/.952/.748/.754, sealed 7/7", "rerun": "https://github.com/sjgant80-hub/seed-library/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "held-out AUC .815/.952/.748/.754, sealed 7/7",
+        "rerun": "https://github.com/sjgant80-hub/seed-library/actions"
+      }
     },
     {
       "id": "kar-citelock",
@@ -132,7 +188,10 @@
       "live": "https://sjgant80-hub.github.io/kar-citelock/",
       "repo": "https://github.com/sjgant80-hub/kar-citelock",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-citelock/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-citelock/actions"
+      }
     },
     {
       "id": "kar-tally",
@@ -142,7 +201,10 @@
       "live": "https://sjgant80-hub.github.io/kar-tally/",
       "repo": "https://github.com/sjgant80-hub/kar-tally",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-tally/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-tally/actions"
+      }
     },
     {
       "id": "kar-canon",
@@ -152,7 +214,10 @@
       "live": "https://sjgant80-hub.github.io/kar-canon/",
       "repo": "https://github.com/sjgant80-hub/kar-canon",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-canon/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-canon/actions"
+      }
     },
     {
       "id": "kar-shingle",
@@ -162,7 +227,10 @@
       "live": "https://sjgant80-hub.github.io/kar-shingle/",
       "repo": "https://github.com/sjgant80-hub/kar-shingle",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-shingle/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-shingle/actions"
+      }
     },
     {
       "id": "kar-glyphguard",
@@ -172,7 +240,10 @@
       "live": "https://sjgant80-hub.github.io/kar-glyphguard/",
       "repo": "https://github.com/sjgant80-hub/kar-glyphguard",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-glyphguard/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-glyphguard/actions"
+      }
     },
     {
       "id": "kar-conform",
@@ -182,7 +253,10 @@
       "live": "https://sjgant80-hub.github.io/kar-conform/",
       "repo": "https://github.com/sjgant80-hub/kar-conform",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-conform/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-conform/actions"
+      }
     },
     {
       "id": "kar-fairdraw",
@@ -192,7 +266,10 @@
       "live": "https://sjgant80-hub.github.io/kar-fairdraw/",
       "repo": "https://github.com/sjgant80-hub/kar-fairdraw",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-fairdraw/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-fairdraw/actions"
+      }
     },
     {
       "id": "kar-veil",
@@ -202,7 +279,10 @@
       "live": "https://sjgant80-hub.github.io/kar-veil/",
       "repo": "https://github.com/sjgant80-hub/kar-veil",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-veil/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-veil/actions"
+      }
     },
     {
       "id": "kar-anchor",
@@ -212,7 +292,10 @@
       "live": "https://sjgant80-hub.github.io/kar-anchor/",
       "repo": "https://github.com/sjgant80-hub/kar-anchor",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-anchor/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-anchor/actions"
+      }
     },
     {
       "id": "kar-warden",
@@ -222,7 +305,10 @@
       "live": "https://sjgant80-hub.github.io/kar-warden/",
       "repo": "https://github.com/sjgant80-hub/kar-warden",
       "free": true,
-      "proof": { "kind": "ci", "rerun": "https://github.com/sjgant80-hub/kar-warden/actions" }
+      "proof": {
+        "kind": "ci",
+        "rerun": "https://github.com/sjgant80-hub/kar-warden/actions"
+      }
     },
     {
       "id": "fallworld",
@@ -232,7 +318,11 @@
       "live": "https://sjgant80-hub.github.io/fallworld/",
       "repo": "https://github.com/sjgant80-hub/fallworld",
       "free": true,
-      "proof": { "kind": "witness-ci", "claim": "witness 70/70", "rerun": "https://github.com/sjgant80-hub/fallworld/actions" }
+      "proof": {
+        "kind": "witness-ci",
+        "claim": "witness 70/70",
+        "rerun": "https://github.com/sjgant80-hub/fallworld/actions"
+      }
     }
   ],
   "pending": [
