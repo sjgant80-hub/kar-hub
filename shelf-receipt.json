@@ -1,0 +1,29 @@
+{
+  "v": "1",
+  "kind": "proven-shelf-receipt",
+  "shelf": "kar-hub",
+  "claim": "every listing on this shelf carries a re-runnable proof, and this certification is itself re-runnable — fetch the catalog, re-run the gate, reproduce the anchor",
+  "spec": {
+    "gate": "proven-shelf",
+    "gateVersion": "1",
+    "shelf": "kar-hub",
+    "catalogUrl": "https://sjgant80-hub.github.io/kar-hub/catalog.json",
+    "rules": {
+      "requireFree": true,
+      "forbidPricing": true,
+      "requireCredit": true
+    }
+  },
+  "specFingerprint": "db62fcafb49058647e61136eddcdea5f1942eb6dceae6188c960d9549d093260",
+  "catalogSha": "d76e13245dbb105410c76dbd729ee28b00d4bf86c7b746b6e464e17d597d3f17",
+  "verdict": {
+    "badge": true,
+    "products": 24,
+    "proven": 24,
+    "problems": 0
+  },
+  "hash": "0451d3a0b8c76c24290ee2031eec1ce7fbf60a1ea72dc52db74a7a2066665152",
+  "admissible": true,
+  "credit": "Powered by the Konomi architecture, created by Thomas Frumkin.",
+  "verify": "https://sjgant80-hub.github.io/proven-shelf/"
+}

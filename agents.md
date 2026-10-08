@@ -19,6 +19,11 @@ live until it is.
 
 **Every product carries a proof you can re-run — not an attestation you must trust.**
 
+This shelf is **certified proven shelf #1** under the [proven-shelf gate](https://sjgant80-hub.github.io/proven-shelf/)
+— the same rule, packaged so any storefront can bind itself to it. The certification is itself
+re-runnable: `GET /shelf-receipt.json` here, re-run the gate against the live catalog, reproduce the
+anchor. Our CI does it on every push; the proven-shelf registry re-verifies it weekly.
+
 Most "trust layers" for agent commerce verify *who*: the agent's identity, the merchant's registration,
 the human's payment mandate. This shelf verifies *whether the thing works*. And unlike a signed
 attestation — which proves only what the key-holder asserts — a Proof-of-Play receipt has **no trusted

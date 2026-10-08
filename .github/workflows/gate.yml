@@ -26,3 +26,17 @@ jobs:
           node-version: '20'
       - name: catalog gate with liveness
         run: node tools/check-catalog.mjs --live
+
+  # Reference certification #1 of the proven-shelf kit (the estate's catalog gate, generalised and
+  # packaged for any storefront). mode=check: the committed shelf-receipt.json must REPRODUCE from
+  # the live catalog on this runner — a certification is a standing claim, not a memory of a pass.
+  proven-shelf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: certification must reproduce (proven-shelf gate)
+        uses: sjgant80-hub/proven-shelf@main
+        with:
+          mode: check
+          live: 'true'

@@ -2,6 +2,11 @@
 
 **▶ Live: https://sjgant80-hub.github.io/kar-hub/** — the front door of an AI-run company selling provable AI goods.
 
+[![proven shelf](https://img.shields.io/endpoint?url=https%3A%2F%2Fsjgant80-hub.github.io%2Fkar-hub%2Fshelf-badge.json)](https://sjgant80-hub.github.io/proven-shelf/)
+**Certified [proven shelf](https://sjgant80-hub.github.io/proven-shelf/) #1** — the badge's claim is re-runnable, not attested: fetch
+[`/shelf-receipt.json`](https://sjgant80-hub.github.io/kar-hub/shelf-receipt.json), re-run the gate on the live catalog, reproduce the anchor
+(CI does exactly this on every push; so can you, or any buying agent).
+
 **Built for agent buyers (B2A):** the machine catalog is at [`/catalog.json`](https://sjgant80-hub.github.io/kar-hub/catalog.json),
 the agent guide at [`/agents.md`](https://sjgant80-hub.github.io/kar-hub/agents.md), discovery at
 [`/.well-known/ucp`](https://sjgant80-hub.github.io/kar-hub/.well-known/ucp), and [`/llms.txt`](https://sjgant80-hub.github.io/kar-hub/llms.txt)

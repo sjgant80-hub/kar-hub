@@ -42,6 +42,23 @@
       }
     },
     {
+      "id": "proven-shelf",
+      "name": "proven-shelf — certify a whole storefront",
+      "category": "trust-rail",
+      "pitch": "The anti-lemons gate packaged for ANY agent storefront or marketplace: one CI step certifies that every listing on a catalog carries a re-runnable proof, that the committed shelf receipt reproduces from the live catalog, and that no link is dead. The badge itself is re-runnable — one GET + one re-run, never a signed attestation. This very shelf is reference certification #1.",
+      "live": "https://sjgant80-hub.github.io/proven-shelf/",
+      "repo": "https://github.com/sjgant80-hub/proven-shelf",
+      "free": true,
+      "proof": {
+        "kind": "witness-gate",
+        "claim": "The shelf-gate kernel is witness-CLEAN on GitHub's runner: 127/127 mutants killed, 0 survived, score 1.0, under a 55-test suite with golden anchors and garbage-fuzz. CI re-mints the receipt on every push and refuses any byte drift.",
+        "anchor": "a3ec7370a2f395eadba112b5ab63b1e9f2c8e2aa8a19fdf3a3ef4dc2a82e6ede",
+        "receipt": "https://sjgant80-hub.github.io/proven-shelf/witness-receipt.json",
+        "rerun": "https://github.com/sjgant80-hub/proven-shelf/actions/workflows/gate.yml",
+        "note": "kar-hub itself is certified by this gate: /shelf-receipt.json here reproduces from /catalog.json under the pinned gate, or CI fails."
+      }
+    },
+    {
       "id": "the-doubt",
       "name": "the-doubt — a thing cannot validate itself",
       "category": "trust-rail",

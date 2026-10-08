@@ -1,0 +1,6 @@
+{
+  "shelf": "kar-hub",
+  "catalog": "catalog.json",
+  "catalogUrl": "https://sjgant80-hub.github.io/kar-hub/catalog.json",
+  "rules": { "requireFree": true, "forbidPricing": true, "requireCredit": true }
+}
