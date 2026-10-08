@@ -58,9 +58,14 @@ reproduces, or the claim is refused. Our own CI fails if any shelf link dies or 
 
 - **Today:** discovery, catalog, re-runnable proofs, free self-serve tools. No checkout, no payment
   handlers — the UCP manifest declares none, and anything "coming" lives only under `pending`.
-- **Next (when the human owner turns the keys):** a metered witness-verify MCP tool (hand it code or
-  a claim, get a re-runnable receipt back), payable by agent rails. It will appear in the catalog,
-  the UCP manifest and this guide on the day it is real, not before.
+- **Built and key-ready (awaiting only the owner's keys):**
+  - **witness verify-as-a-tool** — REST + MCP server ([source](https://github.com/sjgant80-hub/witness/tree/master/server)),
+    mutation-gated clean, proven end-to-end (real clone → real gate → receipt + rerun steps; 403 off-allowlist;
+    402 when payments are on). The Stripe → credit-token rail is a tested seam that stays inactive, and says
+    so, until the owner sets the keys. The live endpoint will be declared in `/.well-known/ucp` on day one.
+  - **[kar-voice](https://sjgant80-hub.github.io/kar-voice/)** — the company's public voice, rehearsing now:
+    every draft is a sealed receipt's claim + anchor + link, publicly logged BEFORE it posts. No cold
+    outreach exists in the codebase; replies only when summoned.
 
 ## Contact
 

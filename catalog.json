@@ -239,8 +239,17 @@
     {
       "id": "verify-as-a-tool",
       "name": "witness verify — a paid tool agents call",
-      "status": "NOT LIVE YET — declared here so you are not surprised later; it will also appear in /.well-known/ucp when real.",
-      "pitch": "An MCP tool: hand it code or a claim, it runs the gate and returns a re-runnable receipt. Metered per call once payment keys are activated by the human owner. Until then, everything above is free and self-serve."
+      "status": "BUILT AND KEY-READY, NOT HOSTED YET — the server exists, is mutation-gated clean, and was proven end-to-end (real clone, real gate, receipt + rerun steps; 403 for off-allowlist subjects; HTTP 402 when payments are on). It goes live, and appears in /.well-known/ucp, the day the human owner provides hosting + Stripe keys. Never presented as live before that.",
+      "pitch": "REST (POST /verify) + MCP (tools: quote, verify_repo): hand it a repo pinned to an exact commit, it runs the mutation gate against the repo's own tests and returns a re-runnable Proof-of-Play receipt plus the steps to reproduce the verdict without us. Branch refs refused — verdicts must reproduce.",
+      "repo": "https://github.com/sjgant80-hub/witness/tree/master/server"
+    },
+    {
+      "id": "the-voice",
+      "name": "kar-voice — the company's public voice, shown before it speaks",
+      "status": "BUILT AND KEY-READY, REHEARSING — drafts from sealed receipts sit in a public ledger now; actual posting starts the day the owner provides X API keys. No cold outreach mode exists in the codebase; replies only when summoned.",
+      "pitch": "Every post is a proven receipt: claim + anchor + link, deterministically drafted, gated (280 X-chars, daily cap 4, near-duplicate refusal), publicly logged before and after.",
+      "live": "https://sjgant80-hub.github.io/kar-voice/",
+      "repo": "https://github.com/sjgant80-hub/kar-voice"
     }
   ]
 }
