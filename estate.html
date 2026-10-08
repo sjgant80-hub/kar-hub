@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Whole Estate — one index</title>
+<meta name="description" content="Every public repository in the estate, in one searchable index — with the proven, live mind featured. One unified system, not a curated subset." />
+<meta name="color-scheme" content="dark light" />
+<style>
+  :root{ --bg:#0b0e12; --panel:#121720; --panel2:#0e131b; --ink:#e8eef6; --muted:#8b97a7; --line:#1f2835;
+    --accent:#5ad1a8; --accent2:#6aa8ff; --warn:#f0b254; --radius:14px; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; --sans:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  :root:not([data-theme="light"]){ color-scheme:dark; }
+  @media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --bg:#f6f8fb; --panel:#fff; --panel2:#f0f3f8; --ink:#141a22; --muted:#5d6b7d; --line:#e2e8f0; }}
+  :root[data-theme="dark"]{ --bg:#0b0e12; --panel:#121720; --panel2:#0e131b; --ink:#e8eef6; --muted:#8b97a7; --line:#1f2835; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:0 16px 70px}
+  header{padding:50px 0 16px;border-bottom:1px solid var(--line)}
+  .tag{color:var(--accent);font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+  h1{font-size:clamp(28px,5vw,42px);margin:10px 0 10px;letter-spacing:-.02em;font-weight:770}
+  .counts{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-family:var(--mono);font-size:13px;margin:4px 0 0}
+  .counts b{color:var(--ink)}
+  h2{font-size:14px;margin:34px 0 10px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+  .feat{display:grid;gap:10px}@media(min-width:640px){.feat{grid-template-columns:repeat(2,1fr)}}
+  a.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;transition:border-color .15s}
+  a.card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+  a.card b{color:var(--ink);font-size:14.5px} a.card span{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+  .search{width:100%;font-family:var(--mono);font-size:14px;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:2px 0 6px}
+  #meta{color:var(--muted);font-size:12.5px;font-family:var(--mono);margin:0 0 10px}
+  .list{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .row{display:flex;gap:12px;align-items:baseline;padding:9px 14px;border-bottom:1px solid var(--line);text-decoration:none}
+  .row:last-child{border-bottom:0} .row:hover{background:var(--panel2)}
+  .row .nm{color:var(--ink);font-family:var(--mono);font-size:13px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 0 38%}
+  .row .ds{color:var(--muted);font-size:12.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .mt{color:var(--muted);font-family:var(--mono);font-size:11px;flex:0 0 auto}
+  .row.arch .nm{color:var(--muted)} .pill{font-size:10px;border:1px solid var(--line);border-radius:999px;padding:0 6px;color:var(--warn)}
+  .foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  a.plain{color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">THE ESTATE · one unified index</div>
+    <h1>The whole estate, in one place.</h1>
+    <div class="counts" id="counts">counting…</div>
+  </header>
+
+  <h2>The proven, live mind</h2>
+  <p style="color:var(--muted);font-size:13.5px;margin:0 0 14px">The organs that are built, gated, and running — the mind behind <a class="plain" href="./">the front door</a>. Everything below this is the full workshop.</p>
+  <div class="feat" id="featured"></div>
+
+  <h2>Every public repository</h2>
+  <input id="q" class="search" placeholder="search 1,740 repos by name or description…" autocomplete="off" />
+  <div id="meta"></div>
+  <div class="list" id="list"></div>
+
+  <div class="foot">
+    Private repositories are counted but their names are withheld here — this is a public surface and the estate stays sovereign. Each row links to its source. The featured mind links to live, re-runnable tools. Generated from the live org. Powered by the Konomi architecture, created by Thomas Frumkin.
+  </div>
+</div>
+<script type="module">
+const GH='https://github.com/sjgant80-hub/', IO='https://sjgant80-hub.github.io/';
+const FEATURED=[
+  ['konomi-slm','The engine — knowledge in verified patterns, not weights',IO+'konomi-slm/'],
+  ['konomi-slm/pattern-books','The verified pattern-book library (11 organs)',IO+'konomi-slm/pattern-books.html'],
+  ['konomi-slm/council','The gated council — proposes, the gate disposes',IO+'konomi-slm/council.html'],
+  ['konomi-slm/synapses','The organs wired into one mind',IO+'konomi-slm/synapses.html'],
+  ['discombobulator','Re-grow legacy software into owned verified logic',IO+'discombobulator/enterprise.html'],
+  ['csv-forge','Bring your CSV, own a verified model',IO+'csv-forge/'],
+  ['the-doubt','The trust primitive: a thing cannot validate itself',IO+'the-doubt/'],
+  ['fallforgemint','Mint your own small model from one task',IO+'fallforgemint/'],
+  ['estate-attest','The trust rail turned inward (HOLDS / DRIFTED)',IO+'estate-attest/'],
+  ['seed-library','Knowledge in seeds, not weights — 226 bytes',IO+'seed-library/'],
+];
+const el=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e;};
+(async()=>{
+  let m; try{ m=await (await fetch('./estate-manifest.json?cb='+Date.now())).json(); }catch(e){ document.querySelector('#counts').textContent='manifest not found'; return; }
+  const c=m.counts;
+  document.querySelector('#counts').innerHTML=`<span><b>${c.total}</b> repositories</span><span><b>${c.public}</b> public</span><span><b>${c.private}</b> private <span style="opacity:.6">(withheld)</span></span><span><b>${c.archived}</b> archived</span><span>generated ${m.generated}</span>`;
+  const fb=document.querySelector('#featured');
+  for(const [n,d,u] of FEATURED){ const a=el('a','card'); a.href=u; a.innerHTML=`<b>${n} ↗</b><span>${d}</span>`; fb.append(a); }
+  const repos=m.repos||[]; const list=document.querySelector('#list'); const meta=document.querySelector('#meta'); const q=document.querySelector('#q');
+  const CAP=400;
+  function render(f){
+    const t=f.trim().toLowerCase();
+    const hits = t ? repos.filter(r=> r.n.toLowerCase().includes(t) || (r.d||'').toLowerCase().includes(t)) : repos;
+    list.innerHTML='';
+    meta.textContent = t ? `${hits.length} match "${f}"${hits.length>CAP?` — showing first ${CAP}`:''}` : `${repos.length} public repos, newest first — showing first ${CAP}, search to narrow`;
+    for(const r of hits.slice(0,CAP)){
+      const a=el('a','row'+(r.a?' arch':'')); a.href=GH+r.n; a.target='_blank'; a.rel='noopener';
+      a.innerHTML=`<span class="nm">${r.n}${r.a?' <span class="pill">archived</span>':''}</span><span class="ds">${r.d||''}</span><span class="mt">${r.l||''} · ${r.u||''}</span>`;
+      list.append(a);
+    }
+  }
+  render(''); let tmr; q.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(()=>render(q.value),120);});
+})();
+</script>
+</body>
+</html>
