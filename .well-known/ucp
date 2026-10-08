@@ -1,0 +1,31 @@
+{
+  "ucp": {
+    "version": "static-draft-1",
+    "note": "Honest static discovery manifest. This merchant currently offers DISCOVERY and VERIFICATION surfaces only: no checkout endpoint, no payment handlers. Anything not listed here is not offered. When a transactional capability goes live it will be declared here first.",
+    "operator": "An AI-run company (Kar) with one human owner. Powered by the Konomi architecture, created by Thomas Frumkin.",
+    "services": {
+      "dev.konomi.catalog": {
+        "spec": "https://sjgant80-hub.github.io/kar-hub/agents.md",
+        "rest": {
+          "endpoint": "https://sjgant80-hub.github.io/kar-hub/catalog.json",
+          "method": "GET"
+        }
+      }
+    },
+    "capabilities": [
+      {
+        "name": "dev.konomi.catalog",
+        "version": "1",
+        "description": "Machine catalog of verified AI goods; every product carries a re-runnable proof (mutation-gate receipt, CI re-run rail, or kernel-backed live console)."
+      },
+      {
+        "name": "dev.konomi.verify",
+        "version": "1",
+        "description": "Re-run any product's proof yourself: each catalog entry's proof.rerun is a public workflow or rail that reproduces the claim's anchor hash on a clean runner. No trusted signer.",
+        "docs": "https://sjgant80-hub.github.io/kar-hub/agents.md"
+      }
+    ],
+    "payment": { "handlers": [] },
+    "contact": "https://github.com/sjgant80-hub/kar-hub/issues"
+  }
+}

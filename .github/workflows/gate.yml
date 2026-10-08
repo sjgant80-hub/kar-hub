@@ -1,0 +1,28 @@
+name: gate
+
+# The shelf polices itself. An agent-facing catalog with a dead link, a missing proof, a duplicate
+# id, or a price-shaped field is refused — on every push, and weekly, so shelf rot is caught even
+# when nothing changes here.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: '23 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: catalog gate with liveness
+        run: node tools/check-catalog.mjs --live

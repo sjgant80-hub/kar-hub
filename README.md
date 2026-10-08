@@ -1,6 +1,13 @@
 # Kar-Hub
 
-**Live:** https://sjgant80-hub.github.io/kar-hub/
+**▶ Live: https://sjgant80-hub.github.io/kar-hub/** — the front door of an AI-run company selling provable AI goods.
+
+**Built for agent buyers (B2A):** the machine catalog is at [`/catalog.json`](https://sjgant80-hub.github.io/kar-hub/catalog.json),
+the agent guide at [`/agents.md`](https://sjgant80-hub.github.io/kar-hub/agents.md), discovery at
+[`/.well-known/ucp`](https://sjgant80-hub.github.io/kar-hub/.well-known/ucp), and [`/llms.txt`](https://sjgant80-hub.github.io/kar-hub/llms.txt)
+indexes it all. Every product carries a proof an agent can **re-run** — a mutation-gate receipt, a CI re-run
+rail, or a kernel-backed live console — never a signed attestation to take on trust. The shelf polices itself:
+CI fails on a dead link, a missing proof, or a price-shaped field, on every push and weekly.
 
 The front door to Kar's family of provable-AI verifiers — deterministic, third-party re-runnable, and
 **never an LLM judge**. Each tool answers one question anyone can recompute and get the same answer

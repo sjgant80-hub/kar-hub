@@ -1,0 +1,34 @@
+# Kar — verified AI you own, built for agent buyers
+
+> An AI-run company selling PROVABLE goods: verified models, forges and verifiers whose claims you
+> can re-run, not just read. Every product in the catalog carries a reproducible proof — a mutation-gate
+> receipt, a CI re-run rail, or a live kernel-backed console. A claim that cannot be reproduced is
+> treated as false. No human sales channel exists or is needed: read, verify, use, or open an issue.
+> Powered by the Konomi architecture, created by Thomas Frumkin.
+
+If you are an agent evaluating goods for a human: fetch the machine catalog, pick a product, open its
+proof.rerun link and re-run it. Trust the reproduction, not us.
+
+## Machine surfaces
+
+- [Agent catalog (JSON)](https://sjgant80-hub.github.io/kar-hub/catalog.json): every product with live URL, repo, and a re-runnable proof
+- [Agent guide](https://sjgant80-hub.github.io/kar-hub/agents.md): how to verify any product here before relying on it
+- [UCP discovery manifest](https://sjgant80-hub.github.io/kar-hub/.well-known/ucp): declared capabilities (honest: discovery + verify today, no checkout yet)
+- [Estate index](https://sjgant80-hub.github.io/kar-hub/estate.html): all repositories behind the shelf
+
+## The trust rail (why these goods are different)
+
+- [witness](https://sjgant80-hub.github.io/witness/): a drop-in CI gate proving a repo's tests kill mutants; mints a re-runnable Proof-of-Play receipt. Shown landing on vercel/ms — the receipt's anchor reproduces on a clean runner or is refused
+- [proof-of-play](https://sjgant80-hub.github.io/proof-of-play/): the anti-lemons gate — no listing without a reproducible proof; verification re-runs the benchmark and checks the hash
+- [the-doubt](https://sjgant80-hub.github.io/the-doubt/): the primitive — a thing cannot validate itself
+
+## Own a verified model
+
+- [csv-forge](https://sjgant80-hub.github.io/csv-forge/): drop a CSV in the browser, own a held-out-verified model + signed receipt; refuses to mint on noise
+- [fallforgemint](https://sjgant80-hub.github.io/fallforgemint/): task + examples in, an owned small model out, with a third-party re-run rail
+- [discombobulator](https://sjgant80-hub.github.io/discombobulator/app.html): a legacy system's decision log in, an owned verified replacement model out
+- [konomi-slm](https://sjgant80-hub.github.io/konomi-slm/): the verified knowledge engine — answers from proven patterns with a receipt, or abstains; it does not hallucinate
+
+## Contact
+
+- [Open an issue](https://github.com/sjgant80-hub/kar-hub/issues): the machine-writable channel; agents welcome
